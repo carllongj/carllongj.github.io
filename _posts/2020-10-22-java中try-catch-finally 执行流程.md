@@ -1,4 +1,4 @@
-## t-c-f作用
+# t-c-f作用
 * t-c-f(try-catch-finally),是用于处理异常的流程控制
   * 当try块中出现异常,会根据具体的异常选择对应的catch块来执行
   * finally则是在try和catch块执行完成后执行语句,一般会在try或者catch后一定执行,也会有一些例外.
@@ -86,6 +86,7 @@
       3. 如果在 0 - 17 条指令间出现非Exception异常,则会跳转到第48条指令,也就是执行finally块代码.
       4.若在28 - 37条指令间出现了任何异常,则会跳转到第48条指令,也就是在catch块中出现任何异常,则会跳转到48条指令.
 	  * 可以看出,不管是任何的流程,最终都会执行finally中的语句.
+
 ## 参考
 * [关于 Java 中 finally 语句块的深度辨析](http://www.ibm.com/developerworks/cn/java/j-lo-finally/index.html)
 * **《深入理解Java虚拟机》**

@@ -1,4 +1,5 @@
 ## classpath选项
+
 1. **classpath选项是什么**  
     * **classpath** 选项是在执行javac 命令和java 命令都可能用到,这个选项的作用是将一些jar包或者目录添加到classpath下,程序查找类或者资源文件时就会搜索classpath路径下.
 2. **classpath选项和cp选项区别**  
@@ -13,6 +14,7 @@
         * 添加jar包到classpath中必须是jar包名称,对于其他的则是到某一个目录
 
 ## Java程序的执行方式
+
 * Java程序通常会使用两种方式来执行    
     1. 是class文件,通过java mainClass 来执行(省略其他参数)
     2. 是jar文件,使用jar -jar Execute.jar 来执行
@@ -24,6 +26,7 @@
         4. 通过-jar选项执行的,不能再通过classpath来指定额外的classpath,对于应用程序类加载器来说,它就只关注当前jar包中的资源.
 
 ## 作用
+
 * 通过classpath来引入外部资源.一般而言,java程序通常会被打包成jar包(如果都是class文件,不好管理),如果要修改配置文件是一个比较麻烦的事情.所以可以通过classpath来引入jar包外部的资源文件.
 * 说说打包方式,一般打包方式为两种:
     1. 为了简单方便而言就是打一个整包,所有的依赖和配置文件都在一个jar包中.
@@ -36,24 +39,28 @@
         * 缺点: 运行程序会比较复杂,需要将依赖拼接到classpath里面.
     * 由于项目构建工具存在maven,打包的问题都能解决,所以对于java程序来说,打包都通过maven来执行,所以两种方式的打包和执行的缺点都能解决.对于第一种方式来说,可以在远程服务器上打整包,也不需要上传.所以这两种方式都可以使用了.   
 ## 说说程序执行
+
 1. 程序执行时,需要用到的class类资源和文件资源都会在classpath路径下去查找.
 2. 在执行程序的时候可以方便的通过classpath选项来将外部资源文件来替换jar包中的资源文件(classpath存在优先级).
 3. 上面提到过使用通过-jar选项执行的,不能再通过classpath来指定额外的classpath,但是可以在jar包中的META-INF/MANIFEST.MF文件中通过Class-Path属性来增加classpath
    
 ## 总结:
+
 * 在选择只打包当前工程代码的情况下:
     1. 可以不使用-jar方式执行,但是最好通过脚本生成执行java程序的命令,主要是通过-classpath选项增加依赖.
     2. 如果使用-jar方式执行,必须在META-INF/MANIFEST.MF文件中指定Class-Path选项来指定依赖包地址.
     3. 使用 -jar方式并且需要外部资源文件,一种是不将资源文件打包到jar包中,另一种则是通过 -Xbootclasspath/p选项来将外部资源文件添加到当前jar包前,提高外部资源程序的优先级.
    
 ## 四丶个人建议
-1. 个人不建议将工程以及其依赖打成一个jar包,不利于工程模块化.
+
+1. 不建议将工程以及其依赖打成一个jar包,不利于工程模块化.
 2. 对于一些可能常变的配置文件可以将其放入到外部资源文件中,通过classpath引入.
 3. 工程打包分情况,如果稳定版本,则打一个方便执行的项目包(如tomcat的安装包,内部分成多个目录).
 4. 对于开发测试过程中的打包,则只打当前工程的jar包,方便开发以及测试.
-5. 对于java程序执行,打成jar包但是不使用 -jar选项去执行,使用 java -classpath lib mainClass 去执行程序.
+5. 对于java程序执行,打成jar包但是不使用 `-jar`选项去执行,使用 `java -classpath lib mainClass` 去执行程序.
  
 ## 五丶参考
+
 * [maven打包时,将所有依赖包拷贝到一个目录](https://blog.csdn.net/qq_23367291/article/details/84577048)
 * [maven打包时,不拷贝资源文件到jar包中](https://blog.csdn.net/javajxz008/article/details/81629011)
 * [maven打包时,指定外部配置文件](https://segmentfault.com/a/1190000003698765)
